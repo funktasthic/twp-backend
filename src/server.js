@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const db = require("./config/database");
+const User = require("./models/user");
 
 class Server {
   constructor() {
@@ -28,6 +30,14 @@ class Server {
 
   async database() {
     // Database connection
+    try {
+      await db.authenticate();
+      // Add models
+      await User.sync({ force: false });
+      console.log("Database connected");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   middlewares() {
