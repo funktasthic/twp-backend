@@ -15,7 +15,7 @@ Este es un proyecto en el cual se construye una API para una aplicación móvil 
 - [Visual Studio Code](https://code.visualstudio.com/) o [Visual Studio](https://visualstudio.microsoft.com/)
  - [Node](https://nodejs.org/en/download/current)
  - Puerto del servidor = 8080
- - Crear una base de datos llamada twd_db
+ - Crear una base de datos llamada twd
 
 ## Instalación
 
