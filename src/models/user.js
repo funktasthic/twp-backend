@@ -7,6 +7,7 @@ class User extends Model {
     static lastname;
     static email;
     static phone;
+    static image_url;
     static password;
     static token;
     static isActive;
@@ -28,6 +29,10 @@ User.init(
       unique: true,
     },
     phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    image_url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
