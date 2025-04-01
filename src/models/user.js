@@ -53,9 +53,20 @@ User.init(
   }
 );
 
+// User have a role
+User.Role = User.belongsTo(require("./role"), { foreignKey: "role_id" });
+
+// User have many addresses
+User.Address = User.hasMany(require("./address"), { foreignKey: "user_id" });
+
+
 User.prototype.toJSON = function () {
   const { password, ...user } = this.get();
   delete user.password; // Delete the property password
+
+  // Include the role_id
+  user.role_id = this.getDataValue("role_id");
+
   return user;
 };
 
