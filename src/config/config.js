@@ -1,14 +1,15 @@
 module.exports = {
   "development": {
-    "database": `${process.env.DB_NAME}.sqlite`,
-    "dialect": "sqlite"
+    "database": "twd",
+    "dialect": "sqlite",
+    "storage": "./twd.sqlite"
   },
   "test": {
-    "database": `${process.env.DB_NAME}.sqlite`,
+    "database": "twd_test",
     "dialect": "sqlite"
   },
   "production": {
-    "database": `${process.env.DB_NAME}.sqlite`,
+    "database": "twd_production",
     "dialect": "sqlite"
   }
 }

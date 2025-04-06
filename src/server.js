@@ -3,8 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const db = require("./config/database");
 const User = require("./models/user");
-const Role = require("./models/role");
 const Address = require("./models/address");
+const Role = require("./models/role");
 
 class Server {
   constructor() {
@@ -36,9 +36,9 @@ class Server {
     try {
       await db.authenticate();
       // Add models
-      await Address.sync({ force: false });
-      await Role.sync({ force: false });
-      await User.sync({ force: false });
+      await Address.sync({force: false});
+      await Role.sync({force: false});
+      await User.sync({force: false});
       console.log("Database connected");
     } catch (error) {
       console.log(error);
