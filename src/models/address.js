@@ -5,12 +5,12 @@ class Address extends Model {
     static id;
     static name;
     static street;
+    static number;
+    static city;
     static neighborhood;
-    static postal_code;
-    static state;
     static country;
     static lat;
-    static lng;
+    static long;
     static type;
 }
 
@@ -18,50 +18,50 @@ Address.init(
     {
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         street: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+        },
+        number: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        city: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         neighborhood: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        postal_code: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        state: {
-            type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         country: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         lat: {
             type: DataTypes.FLOAT,
-            allowNull: false
+            allowNull: false,
         },
-        lng: {
+        long: {
             type: DataTypes.FLOAT,
-            allowNull: false
+            allowNull: false,
         },
         type: {
-            type: DataTypes.ENUM("Home", "Apartment", "Work", "Other"),
-            defaultValue: "Home"
+            type: DataTypes.ENUM("Casa", "Departamento", "Otro"),
+            defaultValue: "Casa",
         }
     },
-    {
-        sequelize: db,
-        modelName: "Address"
-    }
-);
+{
+    sequelize: db,
+    modelName: "Address",
+    timestamps: true,
+});
 
 Address.prototype.toJSON = function () {
     const values = { ...this.get() };
     return values;
-};
+}
 
 module.exports = Address;

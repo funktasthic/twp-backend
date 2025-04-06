@@ -7,17 +7,23 @@ class Role extends Model {
 }
 
 Role.init(
-  {
-    name: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
+    {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+
     },
-  },
-  {
+{
     sequelize: db,
     modelName: "Role",
-  }
-);
+    timestamps: true,
+});
+
+Role.prototype.toJSON = function () {
+    const values = { ...this.get() };
+    return values;
+}
 
 module.exports = Role;
