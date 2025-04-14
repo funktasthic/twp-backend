@@ -15,7 +15,7 @@ class Server {
 
     // Paths
     this.paths = {
-      users: "/api/users/",
+      auth: "/api/",
     };
 
     // Connect to the database
@@ -58,6 +58,7 @@ class Server {
 
   routes() {
     // Use route paths
+    this.app.use(this.paths.auth, require("./routes/authRoutes"));
   }
 
   listen() {
