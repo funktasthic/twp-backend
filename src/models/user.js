@@ -37,7 +37,7 @@ User.init(
         },
         image_url: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
     },
 {
@@ -51,7 +51,6 @@ User.Role = User.belongsTo(require("./role"), { foreignKey: "role_id" });
 
 // User have many addresses
 User.Address = User.hasMany(require("./address"), { foreignKey: "user_id" });
-
 
 User.prototype.toJSON = function () {
     const { password, ...user } = this.get();
