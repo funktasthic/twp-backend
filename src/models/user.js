@@ -9,7 +9,6 @@ class User extends Model {
     static phone;
     static password;
     static image_url;
-    static password;
     static token;
 }
 
