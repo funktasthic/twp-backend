@@ -24,7 +24,7 @@ Este es un proyecto en el cual se construye una API para una aplicación móvil 
 ```bash
 git clone https://github.com/funktasthic/twp-backend.git
 
-cd twd-backend
+cd twp-backend
 ```
 
 2. Verifica las ramas disponibles y cambia a la rama que deseas:
