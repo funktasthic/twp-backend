@@ -1,4 +1,4 @@
-# TWD BACKEND
+# TWP BACKEND
 
 Este es un proyecto en el cual se construye una API para una aplicación móvil de paseos caninos que tiene como fin comprender los aspectos fundamentales de NodeJS, Express, SQLite y Sequelize.
 
@@ -15,14 +15,14 @@ Este es un proyecto en el cual se construye una API para una aplicación móvil 
 - [Visual Studio Code](https://code.visualstudio.com/) o [Visual Studio](https://visualstudio.microsoft.com/)
  - [Node](https://nodejs.org/en/download/current)
  - Puerto del servidor = 8080
- - Crear una base de datos llamada twd
+ - Crear una base de datos llamada twp_db
 
 ## Instalación
 
 1. Clona el repositorio desde GitHub ejecutando los siguientes comandos en tu terminal:
 
 ```bash
-git clone https://github.com/funktasthic/twd-backend.git
+git clone https://github.com/funktasthic/twp-backend.git
 
 cd twd-backend
 ```
