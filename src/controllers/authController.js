@@ -1,13 +1,13 @@
-const { response, request } = require("express");
-const User = require("../models/user");
-const bcryptjs = require("bcryptjs");
-const generateJWT = require("../utils/generateJWT");
-const Role = require("../models/role");
-const jwt = require("jsonwebtoken");
+const { response, request } = require('express');
+const User = require('../models/user');
+const bcryptjs = require('bcryptjs');
+const generateJWT = require('../utils/generateJWT');
+const Role = require('../models/role');
+const jwt = require('jsonwebtoken');
 
 const register = async (req = request, res = response) => {
     try {
-        const { name, lastname, email, password, phone, role_name } = req.body;
+        const { name, lastname, email, password, phone } = req.body;
 
         // Validate if the user exists
         const existingUser = await User.findOne({ where: { email } });
@@ -15,19 +15,19 @@ const register = async (req = request, res = response) => {
         if (existingUser) {
             return res.status(409).json({
                 success: false,
-                message: "El correo electrónico ya existe en el sistema",
+                message: 'El correo electrónico ya existe en el sistema',
                 error: true
             });
         }
 
-        // Get the role by rolename
-        const role = await Role.findOne({ where: { name: role_name } });
+        // Check if the default role exists
+        const defaultRole = await Role.findOne({ where: { name: 'cliente' } });
 
-        if (!role || role.id === 1) {
-            return res.status(404).json({
+        if(!defaultRole) {
+            return res.status(500).json({
                 success: false,
-                message: "El rol seleccionado no existe",
-                error: true
+                message: "El rol predeterminado no existe en el sistema",
+                error: true            
             });
         }
 
@@ -37,8 +37,9 @@ const register = async (req = request, res = response) => {
             email,
             password,
             phone,
-            role_id: role.id
-        }
+            role_id: defaultRole.id,
+            image_url: null
+        };
 
         // Create user in db
         const user = new User(userData);
@@ -60,24 +61,24 @@ const register = async (req = request, res = response) => {
             email: user.email,
             phone: user.phone,
             password: user.password,
-            role_id: user.role_id,
+            role: defaultRole.name,
             token
         };
 
         return res.status(201).json({
             success: true,
             data: dataUser,
-            message: "Te has registrado con éxito"
+            message: 'Te has registrado con éxito'
         });
+
     } catch (error) {
         return res.status(500).json({
-
             success: false,
-            error: true,
-            message: "Error al registrarte"
+            error: error.message,
+            message: 'Error al registrarte'
         });
     }
-}
+};
 
 const login = async (req = request, res = response) => {
     try {
@@ -89,7 +90,7 @@ const login = async (req = request, res = response) => {
         if (!user) {
             return res.status(400).json({
                 error: true,
-                message: "Las credenciales de acceso son incorrectas"
+                message: 'Las credenciales de acceso son incorrectas'
             });
         }
 
@@ -99,7 +100,7 @@ const login = async (req = request, res = response) => {
         if (!validPassword) {
             return res.status(400).json({
                 error: true,
-                message: "Las credenciales de acceso son incorrectas"
+                message: 'Las credenciales de acceso son incorrectas'
             });
         }
 
@@ -113,27 +114,27 @@ const login = async (req = request, res = response) => {
         return res.status(200).json({
             success: true,
             data: dataUser,
-            message: "Has iniciado sesión con éxito",
+            message: 'Has iniciado sesión con éxito',
         });
     } catch (error) {
         return res.status(500).json({
             success: false,
             error: true,
-            message: "Error al iniciar sesión"
+            message: 'Error al iniciar sesión'
         });
     }
 }
 
 const validateToken = async (req = request, res = response) => {
-    const authHeader = req.headers["authorization"];
+    const authHeader = req.headers['authorization'];
 
-    // Separate the token from the "Bearer" prefix
-    token = authHeader && authHeader.split(" ")[1];
+    // Separate the token from the 'Bearer' prefix
+    token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({
             success: false,
-            message: "No tienes token"
+            message: 'No tienes token'
         });
     }
 
@@ -156,22 +157,22 @@ const validateToken = async (req = request, res = response) => {
         if (user) {
             return res.status(200).json({
                 success: true,
-                message: "Token válido",
+                message: 'Token válido',
                 data: dataUser
             })
         }
     } catch (error) {
-        if (error.name === "TokenExpiredError") {
+        if (error.name === 'TokenExpiredError') {
             return res.status(401).json({
                 success: false,
-                message: "Token expirado",
+                message: 'Token expirado',
                 expired: true,
                 error
             });
         }
         return res.status(401).json({
             success: false,
-            message: "Token inválido",
+            message: 'Token inválido',
             error
         });
     }
