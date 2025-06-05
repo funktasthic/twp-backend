@@ -8,7 +8,7 @@ const db = require('./config/database');
 const User = require('./models/user');
 const Address = require('./models/address');
 const Role = require('./models/role');
-const Image = require('./models/image');
+const Image = require('./models/Image');
 
 class Server {
   constructor() {
@@ -20,7 +20,7 @@ class Server {
     // Paths
     this.paths = {
       default: '/api/',
-      fileUpload: '/api/upload'
+      upload: '/api/upload'
     };
 
     // Connect to the database
@@ -72,7 +72,7 @@ class Server {
   routes() {
     // Use route paths
     this.app.use(this.paths.default, require('./routes/authRoutes'));
-    this.app.use(this.paths.fileUpload, require('./routes/fileUploadRoutes'));
+    this.app.use(this.paths.upload, require('./routes/upRegisterRoutes'));
   }
 
   listen() {
