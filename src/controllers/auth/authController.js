@@ -1,8 +1,8 @@
 const { response, request } = require('express');
-const User = require('../models/user');
+const User = require('../../models/user');
 const bcryptjs = require('bcryptjs');
-const generateJWT = require('../utils/generateJWT');
-const Role = require('../models/role');
+const generateJWT = require('../../utils/generateJWT');
+const Role = require('../../models/role');
 const jwt = require('jsonwebtoken');
 
 const register = async (req = request, res = response) => {

@@ -1,9 +1,9 @@
 const { Router } = require("express");
 
 // Controllers
-const { register } = require("../controllers/authController");
-const { login } = require("../controllers/authController");
-const { validateToken } = require("../controllers/authController");
+const { register } = require("../controllers/auth/authController");
+const { login } = require("../controllers/auth/authController");
+const { validateToken } = require("../controllers/auth/authController");
 
 const router = Router();
 
