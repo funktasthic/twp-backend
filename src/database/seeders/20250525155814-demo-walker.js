@@ -14,6 +14,8 @@ module.exports = {
         phone: "987654321",
         image_url: "https://i.pravatar.cc/150?img=47",
         password: bcryptjs.hashSync("maria123", salt),
+        verified: true,
+        verify_code: 2345,          
         role_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()

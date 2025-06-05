@@ -8,6 +8,8 @@ class User extends Model {
     static email;
     static phone;
     static password;
+    static verified;
+    static verify_code;
     static image_url;
     static token;
 }
@@ -39,6 +41,15 @@ User.init(
             type: DataTypes.STRING,
             allowNull: true,
         },
+        verified: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        verify_code: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },        
     },
 {
     sequelize: db,
@@ -53,8 +64,9 @@ User.Role = User.belongsTo(require("./role"), { foreignKey: "role_id" });
 User.Address = User.hasMany(require("./address"), { foreignKey: "user_id" });
 
 User.prototype.toJSON = function () {
-    const { password, ...user } = this.get();
+    const { password, verify_code, ...user } = this.get();
     delete user.password; // Remove password
+    delete user.verify_code; // Remove verification code
 
     // Include the role_id
     user.role_id = this.getDataValue("role_id");

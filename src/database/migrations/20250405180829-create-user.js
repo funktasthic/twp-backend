@@ -44,6 +44,15 @@ module.exports = {
           key: "id"
         }
       },
+      verified: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      verify_code: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },      
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

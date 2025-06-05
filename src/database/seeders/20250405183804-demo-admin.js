@@ -1,6 +1,7 @@
 'use strict';
 
 const bcryptjs = require('bcryptjs');
+const { verify } = require('jsonwebtoken');
 const salt = bcryptjs.genSaltSync();
 
 /** @type {import('sequelize-cli').Migration} */
@@ -15,6 +16,8 @@ module.exports = {
         image_url: "https://avatars.githubusercontent.com/u/43661563?v=4",
         password: bcryptjs.hashSync("AdminTWP_2025", salt),
         role_id: 1,
+        verified: true,
+        verify_code: 1234,
         createdAt: new Date(),
         updatedAt: new Date()
       }
